@@ -14,5 +14,13 @@ public class Routes {
     public static final String getAllDishes = "/get-all-dishes";
     public static final String getDishById = dish + "/{id}";
 
+    public static final String table = "/table";
+    public static final String tableCreate = "/table-create";
+    public static final String tableUpdate = table + "/update/{id}";
+    public static final String tableDelete = table + "/delete/{id}";
+    public static final String getTableById = table + "/{id}";
+    public static final String getAllTable =  "/get-all-tables";
+
+
 
 }

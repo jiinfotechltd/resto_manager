@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 @Entity
 @Table(name = "dish")
@@ -11,7 +13,7 @@ public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -29,6 +31,12 @@ public class Dish {
     @Column(nullable = false)
     private double price;
 
+    @Column(nullable = true)
+    private boolean isDeleted;
+
+    @Column(nullable = true)
+    private Timestamp deletedAt;
+
     public Dish() {
     }
 
@@ -37,11 +45,11 @@ public class Dish {
         this.price = price;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -69,7 +77,6 @@ public class Dish {
         this.isVegetarian = vegetarian;
     }
 
-
     public String getCategory() {
         return category;
     }
@@ -84,6 +91,22 @@ public class Dish {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
 }
