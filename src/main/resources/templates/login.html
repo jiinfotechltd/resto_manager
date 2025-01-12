@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <div th:replace="dashboard/common-head :: common-head"></div>
 </head>
-<body>
-<h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <div class="lockscreen-wrapper">
+        <div class="lockscreen-logo">
+            <img src="https://cdn-icons-png.flaticon.com/128/685/685352.png" width="50" class="border border-1 p-1 rounded-circle" >
+        </div>
+        <div class="lockscreen-item">
+            <div class="lockscreen-image">
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTaQrj4sYPxOvHXEdh7Z6sJoCko-demYalp8EIoHk44v43GrXeq" alt="User Image">
+            </div>
+            <form action="/login"  method="post" class="lockscreen-credentials">
+                <div class="input-group">
+                    <input type="password" name="password" class="form-control border border-1 rounded-2 mx-2" placeholder="password">
+                    <input type="hidden" name="username" value="user">
+                    <div class="input-group-append p-1  border border-1 rounded-circle ms-2">
+                        <button type="submit" class="btn">
+                            <i class="fas fa-arrow-right text-muted"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="lockscreen-footer text-center">
+            <span class="text-secondary fs-7 mt-5">Copyright © 2025 JiInfoTech</span>
+        </div>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
+    <div style="position: absolute; top: 0px; left: 0px; margin: 0px; padding: 0px;"></div>
+</div>
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
 </body>
 </html>
