@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping
 public class DishController {
@@ -35,13 +37,13 @@ public class DishController {
     }
 
     @GetMapping(value = Routes.getDishById)
-    protected ResponseEntity<Response<Dish>> getDishById(@PathVariable("id") int id) {
-        Dish dish = dishService.getDishById(id);
+    protected ResponseEntity<Response<Dish>> getDishById(@PathVariable("id") long id) {
+        Optional<Dish> dish = Optional.ofNullable(dishService.getDishById(id));
         Response<Dish> response = new Response<>();
-        if (dish != null) {
+        if (dish.isPresent()) {
             response.setMessage("Dish retrieved successfully");
             response.setStatus(HttpStatus.OK.value());
-            response.setData(dish);
+            response.setData(dish.get());
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.setMessage("Dish not found");
@@ -51,13 +53,13 @@ public class DishController {
     }
 
     @PutMapping(value = Routes.dishUpdate)
-    protected ResponseEntity<Response<Dish>> updateDish(@PathVariable("id") int id, @RequestBody Dish dishDetails) {
-        Dish updatedDish = dishService.updateDish(id, dishDetails);
+    protected ResponseEntity<Response<Dish>> updateDish(@PathVariable("id") long id, @RequestBody Dish dishDetails) {
+        Optional<Dish> updatedDish = dishService.updateDish(id, dishDetails);
         Response<Dish> response = new Response<>();
-        if (updatedDish != null) {
+        if (updatedDish.isPresent()) {
             response.setMessage("Dish updated successfully");
             response.setStatus(HttpStatus.OK.value());
-            response.setData(updatedDish);
+            response.setData(updatedDish.get());
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.setMessage("Dish not found for update");
@@ -67,7 +69,7 @@ public class DishController {
     }
 
     @DeleteMapping(value = Routes.dishDelete)
-    protected ResponseEntity<Response<String>> deleteDish(@PathVariable int id) {
+    protected ResponseEntity<Response<String>> deleteDish(@PathVariable long id) {
         boolean isDeleted = dishService.deleteDish(id); // Service method now returns boolean
         Response<String> response = new Response<>();
 

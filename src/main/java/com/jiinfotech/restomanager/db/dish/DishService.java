@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DishService {
@@ -19,21 +20,21 @@ public class DishService {
         return dishRepo.findAll();
     }
 
-    public Dish getDishById(int id) {
+    public Dish getDishById(long id) {
         return dishRepo.findById(id).orElse(null);
     }
 
-    public Dish updateDish(int id, Dish dishDetails) {
-        Dish dish = getDishById(id);
-        if (dish != null) {
-            dish.setName(dishDetails.getName());
-            dish.setPrice(dishDetails.getPrice());
-            return dishRepo.save(dish);
+    public Optional<Dish> updateDish(long id, Dish dishDetails) {
+        Optional<Dish> dish = dishRepo.findById(id);
+        if (dish.isPresent()) {
+            dish.get().setName(dishDetails.getName());
+            dish.get().setPrice(dishDetails.getPrice());
+            return Optional.of(dishRepo.save(dish.get()));
         }
-        return null;
+        return dish;
     }
 
-    public boolean deleteDish(int id) {
+    public boolean deleteDish(long id) {
         if (dishRepo.existsById(id)) {
             dishRepo.deleteById(id);
             return true;
