@@ -17,10 +17,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() // Disable CSRF for simplicity; configure it properly in production
+                .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers(Routes.login, Routes.signup, Routes.error).permitAll() // Publicly accessible
-                .anyRequest().authenticated() // All other requests require authentication
+                .requestMatchers(Routes.login, Routes.signup, Routes.error).permitAll()
+                .requestMatchers("/resources/**" ,"/static/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/resources/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage(Routes.login)

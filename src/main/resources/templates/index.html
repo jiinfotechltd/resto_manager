@@ -3,10 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thymeleaf Starter</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Dashboard</title>
+    <div th:replace="dashboard/common-head :: common-head"></div>
 </head>
-<body>
-Welcome to the Project
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <div th:replace="dashboard/topbar :: topbar"></div>
+    <div th:replace="dashboard/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <h1 class="m-0 text-dark bg-blue">Dashboard</h1>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-primary"><i class="fas fa-users"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Users</span>
+                                <span class="info-box-number">1,234</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success"><i class="fas fa-dollar-sign"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Revenue</span>
+                                <span class="info-box-number">$12,345</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning"><i class="fas fa-file-alt"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Reports</span>
+                                <span class="info-box-number">23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Chart Example</h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart-example" style="height: 200px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+   <div th:replace="dashboard/footer :: footer"></div>
+</div>
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
 </body>
 </html>
