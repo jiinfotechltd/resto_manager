@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Tables</title>
+  <div th:replace="dashboard/common-head :: common-head"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <div th:replace="dashboard/topbar :: topbar"></div>
+  <div th:replace="dashboard/sidebar :: sidebar"></div>
+  <div class="content-wrapper" >
+    <div class="container">
+      <div class="text-center mb-4">
+        <h1 class="text-primary">Restaurant Tables</h1>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTableModal">Add New Table</button>
+      </div>
+      <div class="row">
+        <div th:each="table : ${tables}" class="col-md-4 mb-3">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title">Table Number: <span th:text="${table.tableNumber}"></span></h5>
+              <p class="card-text">
+                Capacity: <span th:text="${table.capacity}"></span><br>
+                Vacant: <span th:text="${table.isVacant ? 'Yes' : 'No'}"></span>
+              </p>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-primary btn-sm" data-bs-toggle='modal' th:data-bs-target="'#updateTableModal' + ${table.id}">Update</button>
+                <form method="post" th:action="@{${@routes.tableDelete}}">
+                  <input type="hidden" name="id" th:value="${table.id}" />
+                  <button class="btn btn-danger btn-sm"  type="button" onclick="sureYouWantDelete(this.form)">Remove</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" th:id="'updateTableModal' + ${table.id}" tabindex="-1" aria-labelledby="updateTableModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-warning" id="updateTableModalLabel">Update Table</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:object="${table}" th:action="@{${@routes.tableUpdate}}" method="post">
+                  <input type="hidden" name="id" th:value="${table.id}"/>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="tableNumber" class="form-label">Table Number</label>
+                      <input type="number" class="form-control" name="tableNumber" th:value="${table.tableNumber}" disabled>
+                    </div>
+                    <div class="mb-3">
+                      <label for="capacity" class="form-label">Capacity</label>
+                      <input type="number" class="form-control" name="capacity" th:value="${table.capacity}" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="isVacant" class="form-label">Is Vacant</label>
+                      <select class="form-select" name="vacant">
+                        <option th:value="true" th:selected="${table.isVacant}">Yes</option>
+                        <option th:value="false" th:selected="${!table.isVacant}">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Update Table</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addTableModal" tabindex="-1" aria-labelledby="addTableModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success" id="addTableModalLabel">Add New Table</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form th:action="@{${@routes.tableCreate}}" method="post">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="tableNumber" class="form-label">Table Number</label>
+                <input type="number" class="form-control" id="tableNumber" name="tableNumber" required>
+              </div>
+              <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity</label>
+                <input type="number" class="form-control" id="capacity" name="capacity" required>
+              </div>
+              <div class="mb-3">
+                <label for="isVacant" class="form-label">Vacant</label>
+                <select class="form-control" id="isVacant" name="isVacant">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success">Add Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="dashboard/components :: delete-modal"></div>
+<div th:replace="dashboard/footer :: footer"></div>
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
+</body>
+</html>
