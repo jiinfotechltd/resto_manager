@@ -1,5 +1,6 @@
 package com.jiinfotech.restomanager.controller;
 
+import com.jiinfotech.restomanager.utils.BaseServices;
 import com.jiinfotech.restomanager.utils.Routes;
 import com.jiinfotech.restomanager.utils.Templates;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class DashboardController {
+public class DashboardController extends BaseServices {
 
     @GetMapping(Routes.dashboard)
     public String showDashboard(Model model) {
@@ -23,6 +24,6 @@ public class DashboardController {
 
     @PostMapping(Routes.login)
     public String postLogin(Model model) {
-        return "redirect :: " + Routes.dashboard;
+       return redirect(Routes.dish);
     }
 }

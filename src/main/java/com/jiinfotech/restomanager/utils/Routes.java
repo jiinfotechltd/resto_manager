@@ -1,5 +1,8 @@
 package com.jiinfotech.restomanager.utils;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Routes {
 
     public static final String dashboard = "/";
@@ -9,8 +12,8 @@ public class Routes {
 
     public static final String dish = "/dish";
     public static final String dishCreate = "/dish-create";
-    public static final String dishUpdate = "/dish-update";
-    public static final String dishDelete = "/dish-delete";
+    public static final String dishUpdate = dish + "/update";
+    public static final String dishDelete = dish + "/delete";
     public static final String getAllDishes = "/get-all-dishes";
     public static final String getDishById = dish + "/{id}";
 
