@@ -1,12 +1,9 @@
 package com.jiinfotech.restomanager.db.dish;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.sql.Timestamp;
 
-@Data
 @Entity
 @Table(name = "dish")
 public class Dish {
@@ -22,8 +19,7 @@ public class Dish {
     private String image;
 
     @Column(nullable = true)
-    @JsonProperty("isVegetarian")
-    private boolean isVegetarian;
+    private Boolean isVegetarian;
 
     @Column(nullable = true)
     private String category;
@@ -69,12 +65,12 @@ public class Dish {
         this.image = image;
     }
 
-    public boolean isVegetarian() {
+    public Boolean getIsVegetarian() {
         return isVegetarian;
     }
 
-    public void setVegetarian(boolean vegetarian) {
-        this.isVegetarian = vegetarian;
+    public void setIsVegetarian(Boolean isVegetarian) {
+        this.isVegetarian = isVegetarian;
     }
 
     public String getCategory() {

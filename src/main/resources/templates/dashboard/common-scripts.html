@@ -25,6 +25,14 @@
                 sidebar.classList.add('navbar-white', 'navbar-light');
             }
         });
+
+        function sureYouWantDelete(form) {
+            $('#deleteConfirmationModal').modal('show');
+            $('#confirmDeleteButton').off('click').on('click', function () {
+                form.submit();
+                $('#deleteConfirmationModal').modal('hide');
+            });
+        }
     </script>
 </div>
 </html>

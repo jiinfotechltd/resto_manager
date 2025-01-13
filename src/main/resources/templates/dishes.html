@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishes</title>
+    <div th:replace="dashboard/common-head :: common-head"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <div th:replace="dashboard/topbar :: topbar"></div>
+    <div th:replace="dashboard/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Filters</a>
+                <form class="d-flex align-items-center w-75">
+                    <input class="form-control me-2" type="search" placeholder="Search for dishes" aria-label="Search" id="searchInput">
+                    <select class="form-select ms-2" id="filterSelect">
+                        <option selected>Filter by Category</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                </form>
+                <button class="btn btn-outline-success ms-2" type="button" data-bs-toggle="modal" data-bs-target="#addDishModal">Add Dish</button>
+            </div>
+        </nav>
+        <div class="modal fade" id="addDishModal" tabindex="-1" aria-labelledby="updateDishModalLabel" aria-hidden="true">
+            <form method="post" th:object="${dish}" th:action="@{${@routes.dishCreate}}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Add New Dishes</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:id="'updateDishForm' + ${dish.id}">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="dishName" class="form-label">Dish Name</label>
+                                    <input type="text" class="form-control" name="name" th:value="${dish.name}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dishPrice" class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="price" th:value="${dish.price}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dishCategory" class="form-label">Category</label>
+                                    <input type="text" class="form-control" name="category" th:value="${dish.category}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dishIsVegetarian" class="form-label">Is Vegetarian</label>
+                                    <select class="form-select" name="isVegetarian" required>
+                                        <option th:selected="${dish.isVegetarian}" th:value="true">Yes</option>
+                                        <option th:selected="!${dish.isVegetarian}" th:value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-4 col-lg-4 mb-3" th:each="dish : ${allDishes}">
+                    <div class="card h-100">
+                        <div class="row g-0">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <img alt="${dish.image}" src="https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249247_640.jpg" class="img-fluid p-2">
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold" th:text="${dish.name}">Paneer Butter Masala</h5>
+                                    <div class="card-text">
+                                        <p>Price: <span class="fw-bold" th:text="${dish.price}"></span></p>
+                                        <p>Category: <span class="fw-bold" th:text="${dish.category}"></span></p>
+                                        <p>Is Vegetarian: <span class="fw-bold" th:text="${dish.isVegetarian}"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center d-flex justify-content-center gap-2">
+                            <button class="btn btn-sm btn-light border border-1 rounded-4" data-bs-toggle="modal" th:data-bs-target="'#updateDishModal' + ${dish.id}">
+                                <i class="fas fa-edit"></i> Update
+                            </button>
+                            <form th:action="@{${@routes.dishDelete}}" method="post">
+                                <input type="hidden" name="id" th:value="${dish.id}">
+                                <button class="btn btn-sm btn-danger border border-1 rounded-4" type="button" onclick="sureYouWantDelete(this.form)">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </form>
+                        </div>
+                        <div class="modal fade" th:id="'updateDishModal' + ${dish.id}" tabindex="-1" aria-labelledby="updateDishModalLabel" aria-hidden="true">
+                           <form method="post" th:object="${dish}" th:action="@{${@routes.dishUpdate}}">
+                               <input type="hidden" name="id" th:value="${dish.id}"/>
+                               <input type="hidden" name="image" th:value="${dish.image}"/>
+                               <div class="modal-dialog">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title" id="updateDishModalLabel">Update Dish Details</h5>
+                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                       </div>
+                                       <form th:id="'updateDishForm' + ${dish.id}">
+                                           <div class="modal-body">
+                                               <div class="mb-3">
+                                                   <label for="dishName" class="form-label">Dish Name</label>
+                                                   <input type="text"  th:feild="*{name}" class="form-control" id="dishName" name="name" th:value="${dish.name}" required>
+                                               </div>
+                                               <div class="mb-3">
+                                                   <label for="dishPrice" class="form-label">Price</label>
+                                                   <input type="number" class="form-control" th:feild="*{price}" id="dishPrice" name="price" th:value="${dish.price}" required>
+                                               </div>
+                                               <div class="mb-3">
+                                                   <label for="dishCategory" class="form-label">Category</label>
+                                                   <input type="text" class="form-control" th:feild="*{category}" id="dishCategory" name="category" th:value="${dish.category}" required>
+                                               </div>
+                                               <div class="mb-3">
+                                                   <label for="dishIsVegetarian" class="form-label">Is Vegetarian</label>
+                                                   <select class="form-select" id="dishIsVegetarian" name="vegetarian" required>
+                                                       <option th:value="true" th:selected="${dish.getIsVegetarian}">Yes</option>
+                                                       <option th:value="false" th:selected="!${dish.getIsVegetarian}">No</option>
+                                                   </select>
+                                               </div>
+                                           </div>
+                                           <div class="modal-footer">
+                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                               <button type="submit" class="btn btn-primary">Save Changes</button>
+                                           </div>
+                                       </form>
+                                   </div>
+                               </div>
+                           </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="dashboard/components :: delete-modal"></div>
+    <div th:replace="dashboard/footer :: footer"></div>
+</div>
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
+</body>
+</html>
