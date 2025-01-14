@@ -15,7 +15,7 @@ public class RestaurantTable {
     private int tableNumber;
 
     @Column(name = "is_vacant", nullable = false)
-    private boolean isVacant;
+    private Boolean isVacant;
 
     @Column(name = "capacity", nullable = false)
     private int capacity;
@@ -48,11 +48,11 @@ public class RestaurantTable {
         this.tableNumber = tableNumber;
     }
 
-    public boolean getIsVacant() {
+    public Boolean getIsVacant() {
         return isVacant;
     }
 
-    public void getIsVacant(boolean status) {
+    public void setIsVacant(Boolean status) {
         this.isVacant = status;
     }
 
