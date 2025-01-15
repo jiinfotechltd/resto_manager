@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <div th:replace="dashboard/common-head :: common-head"></div>
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+    <div class="content-wrapper d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <section class="content">
+            <div class="container">
+                <div class="card card-danger shadow">
+                    <div class="card-header text-center">
+                        <h1>
+                            <i class="fas fa-exclamation-circle text-danger"></i>
+                            <span th:text="${status} ?: 'Error'">Error</span>
+                        </h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3>Oops! Something went wrong.</h3>
+                        <p th:text="'We encountered a problem. ' + (${error} ?: 'An unexpected error occurred.')">
+                            We encountered a problem. Please try again later.
+                        </p>
+                        <p th:if="${path}" th:text="'Requested URL: ' + ${path}" class="text-muted"></p>
+                        <a th:href="@{/}" class="btn btn-primary btn-lg mt-3">
+                            <i class="fas fa-home"></i> Go Back to Home
+                        </a>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small class="text-muted">If the problem persists, <a href="jiinfotech@gmail.com">contact support.</a></small>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
+
+</body>
+</html>
