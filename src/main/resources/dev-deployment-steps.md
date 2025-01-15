@@ -1,9 +1,9 @@
 *12/01/2025*  (Swaroop Manade) RM-3/Dish_Entity_Creation
 
 Step-1 : Drop existing Database if present.
- ```
- DROP DATABASE resto_manager;
- ```
+```
+DROP DATABASE resto_manager;
+```
 Step-2 : Create a Database
 ```
 CREATE DATABASE resto_manager ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -46,6 +46,7 @@ Step-1: We need to old drop dish table;
 ```
     DROP TABLE dish;
 ```
+
 Step-2 : Created new Dish entity table
 ``` 
     CREATE TABLE dish (
@@ -64,3 +65,33 @@ COLLATE utf8mb4_unicode_ci;
 
 ```
 Deployment Completed
+
+*14/01/2025* (Swaroop Manade) RM-9/Order_Entity_Creation
+
+Step-1 : Create Table Orders
+
+```
+CREATE TABLE orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    table_id BIGINT NOT NULL,
+    FOREIGN KEY (table_id) REFERENCES restaurant_table(id)
+) 
+ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
+Step-2 : Create a relationship table for orders and table entities
+         order_dishes
+```
+CREATE TABLE order_dishes (
+    order_id BIGINT NOT NULL,
+    dish_id BIGINT NOT NULL,
+    PRIMARY KEY (order_id, dish_id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (dish_id) REFERENCES dish(id)
+) 
+ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```

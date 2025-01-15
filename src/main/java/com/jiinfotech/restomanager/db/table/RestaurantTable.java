@@ -1,7 +1,10 @@
 package com.jiinfotech.restomanager.db.table;
 
+import com.jiinfotech.restomanager.db.order.Order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "restaurant_table")
@@ -21,8 +24,8 @@ public class RestaurantTable {
     private int capacity;
 
     // Optional: Bidirectional relationship with Order entity if needed
-//    @OneToMany(mappedBy = "table")
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "table")
+    private List<Order> orders;
 
     public RestaurantTable() {}
 
