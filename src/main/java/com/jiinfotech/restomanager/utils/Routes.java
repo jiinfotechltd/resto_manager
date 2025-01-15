@@ -24,6 +24,14 @@ public class Routes {
     public static final String getTableById = table + "/{id}";
     public static final String getAllTable =  "/get-all-tables";
 
+    public static final String order = "/orders";
+    public static final String orderCreate = "/order-create";
+    public static final String updateOrderByTableID = order + "/update/table-id/{id}";
+    public static final String orderDelete = order + "/delete/{id}";
+    public static final String getOrderByID = order + "/{id}";
+    public static final String getOrdersByTableID = order + "/table-id/{id}";
+    public static final String getAllOrders = order + "/get-all-orders";
+    public static final String clearOrdersByTableID = order + "/clear/table-id/{id}";
 
 
 }

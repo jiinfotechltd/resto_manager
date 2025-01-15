@@ -23,3 +23,23 @@ CREATE TABLE restaurant_table (
     ENGINE = InnoDB
     DEFAULT CHARSET = utf8mb4
     COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    table_id BIGINT NOT NULL,
+    FOREIGN KEY (table_id) REFERENCES restaurant_table(id)
+)
+ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE order_dishes (
+    order_id BIGINT NOT NULL,
+    dish_id BIGINT NOT NULL,
+    PRIMARY KEY (order_id, dish_id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (dish_id) REFERENCES dish(id)
+)
+ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4
+COLLATE utf8mb4_unicode_ci;
