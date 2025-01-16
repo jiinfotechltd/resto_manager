@@ -1,5 +1,6 @@
 package com.jiinfotech.restomanager.db.table;
 
+import com.jiinfotech.restomanager.utils.GoogleChatNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -10,9 +11,16 @@ public class TableService {
 
     @Autowired
     private RestaurantTableRepo tableRepo;
+    @Autowired
+    private GoogleChatNotificationService googleChatNotificationService;
 
-    public RestaurantTable addTable(RestaurantTable restaurantTable) {
-        return tableRepo.save(restaurantTable);
+    public void addTable(RestaurantTable restaurantTable) {
+         Optional<RestaurantTable> mayBeTable = tableRepo.findByTableNumber(restaurantTable.getTableNumber());
+         if(mayBeTable.isPresent()){
+             googleChatNotificationService.sendNotification("Error when creating table with same number"+ mayBeTable.get().getTableNumber());
+         } else{
+             tableRepo.save(restaurantTable);
+         }
     }
 
     public List<RestaurantTable> getAllTables() {
