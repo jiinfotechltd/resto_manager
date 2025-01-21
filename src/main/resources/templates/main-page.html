@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <div th:replace="dashboard/common-head :: common-head"></div>
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed">
+<div class="wrapper">
+    <div th:replace="dashboard/topbar :: topbar"></div>
+    <div th:replace="dashboard/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-lg-3 col-6 small-box mx-2" th:each="table : ${allTables}" th:classappend="${(table.allDishes != null && table.allDishes.size() > 0) ? 'bg-warning' : 'bg-secondary'}">
+                    <div class="inner">
+                        <h6> Table No <span th:text="${table.restaurantTable.tableNumber}"></span></h6>
+                        <span> No Dishes : <span>0</span></span>
+                        <span> Total Amount : <span>0</span></span>
+                    </div>
+                    <div class="inner">
+                        <span class="text-center"> 0 min </span>
+                    </div>
+                    <button class="btn btn-sm small-box-footer" th:if="${!table.restaurantTable.isVacant}" data-toggle="modal" >
+                        CheckOut <i class="fas fa-arrow-circle-right"></i>
+                    </button>
+                    <button class="btn btn-sm small-box-footer" th:if="${table.restaurantTable.isVacant}" data-toggle="modal" th:data-target="'#modal-xl' + ${table.restaurantTable.tableNumber}">
+                            Take order <i class="fas fa-arrow-circle-right"></i>
+                        </button>
+                    <div class="modal fade" th:id="'modal-xl' + ${table.restaurantTable.tableNumber}" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header d-flex justify-content-between">
+                                    <h4 class="modal-title">Table No <span th:text="${table.restaurantTable.tableNumber}" ></span></h4>
+                                    <span>
+                                        <span th:text="${table.totalAmount}"></span>
+                                    </span>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body d-flex gap-3">
+                                    <div class="card w-50">
+                                        <div class="card-header">All Dishes</div>
+                                        <div class="card-body" style="flex: 1; max-height: 400px; overflow-y: auto;">
+                                            <span class="text-secondary">Add dishes from here</span>
+                                            <blockquote class="quote-success border border-1 rounded-3 my-2 d-flex justify-content-between" th:each="dish : ${allDishes}">
+                                                <div>
+                                                    <h5 id="warning" th:text="${dish.name}"></h5>
+                                                    <span> Price : <span th:text="${dish.price}"></span> Rs</span>
+                                                </div>
+                                                <form class="ajax-form" th:td-refresh="${@fragments.getTempOrderTable}+${table.restaurantTable.id}" th:action="@{${@routes.orderCreate}}" method="post">
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <input type="hidden" name="dishId" th:value="${dish.id}">
+                                                        <input type="hidden" name="tableId" th:value="${table.restaurantTable.id}">
+                                                        <input type="number" name="quan" class="form-control me-2" min="1" max="10" value="1" style="width: 60px;"/>
+                                                        <button class="btn btn-primary btn-sm" type="submit">Add</button>
+                                                    </div>
+                                                </form>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                    <div class="card w-50" >
+                                        <div class="card-header">Order for table <span th:text="${table.restaurantTable.tableNumber}"></span></div>
+                                        <div class="card-body">
+                                            <div th:replace="fragments/main-page-fragments :: get-temp-order-table"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="dashboard/components :: delete-modal"></div>
+    <div th:replace="dashboard/footer :: footer"></div>
+</div>
+<div th:replace="dashboard/common-scripts :: common-scripts"></div>
+</body>
+</html>

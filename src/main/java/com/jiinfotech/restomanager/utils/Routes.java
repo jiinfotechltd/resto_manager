@@ -33,5 +33,7 @@ public class Routes {
     public static final String getAllOrders = order + "/get-all-orders";
     public static final String clearOrdersByTableID = order + "/clear/table-id/{id}";
 
+    public static final String getTempOrderTable = "/get-temp-order-table";
+
 
 }

@@ -9,4 +9,5 @@ public class Templates {
 
    public final static String table = "table";
    public final static String dishes = "dishes";
+   public final static String mainPage = "main-page";
 }
