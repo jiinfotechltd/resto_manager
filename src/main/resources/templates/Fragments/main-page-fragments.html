@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="get-temp-order-table" th:td-component="${@fragments.getTempOrderTable}+${table.restaurantTable.id}" th:td-component-url="${@routes.getTempOrderTable}">
+    <table  class="table">
+        <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dish, itr : ${table.allDishes}">
+            <td th:text="${itr.index + 1}"></td>
+            <td th:text="${dish.dishName}"></td>
+            <td th:text="${dish.dishPrice}"></td>
+            <td th:text="${dish.dishQuantity}"></td>
+            <td th:text="${dish.dishTotalAmount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center mt-5 w-100">
+        <button class="btn btn-success">
+            <span th:text="${table.totalAmount}"></span> Rs Place Order
+        </button>
+    </div>
+</div>
+</html>

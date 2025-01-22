@@ -27,6 +27,9 @@ CREATE TABLE restaurant_table (
 CREATE TABLE orders (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     table_id BIGINT NOT NULL,
+    total_amount DOUBLE NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    is_paid BOOLEAN NOT NULL,
     FOREIGN KEY (table_id) REFERENCES restaurant_table(id)
 )
 ENGINE = InnoDB
@@ -34,11 +37,13 @@ DEFAULT CHARSET = utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE order_dishes (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_id BIGINT NOT NULL,
     dish_id BIGINT NOT NULL,
-    PRIMARY KEY (order_id, dish_id),
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (dish_id) REFERENCES dish(id)
+    dish_quant INT NOT NULL,
+    dish_name INT NOT NULL,
+    dish_price double NOT NULL,
+    dish_total_amount double NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARSET = utf8mb4

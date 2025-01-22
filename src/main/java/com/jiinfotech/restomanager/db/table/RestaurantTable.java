@@ -23,11 +23,13 @@ public class RestaurantTable {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    // Optional: Bidirectional relationship with Order entity if needed
-    @OneToMany(mappedBy = "table")
-    private List<Order> orders;
+//    // Optional: Bidirectional relationship with Order entity if needed
+//    @OneToMany(mappedBy = "table")
+//    private List<Order> orders;
 
-    public RestaurantTable() {}
+    public RestaurantTable() {
+
+    }
 
     public RestaurantTable(int tableNumber, boolean isVacant, int capacity) {
         this.tableNumber = tableNumber;
@@ -70,5 +72,18 @@ public class RestaurantTable {
     @Override
     public String toString() {
         return "RestaurantTable{" + "id=" + id + ", tableNumber=" + tableNumber + ", status='" + isVacant + '\'' + ", capacity=" + capacity + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestaurantTable that = (RestaurantTable) o;
+        return id == that.id; // You can also use tableNumber if it's unique.
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id); // Or use Integer.hashCode(tableNumber) if using tableNumber.
     }
 }
