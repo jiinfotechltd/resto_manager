@@ -69,6 +69,7 @@ public class SessionStorage {
                     newOrderDishes.setDishId(dishId);
                     Dish dish = dishRepo.findById(dishId).get();
                     newOrderDishes.setDishName(dish.getName());
+                    newOrderDishes.setId(dishId);
                     newOrderDishes.setDishPrice(dish.getPrice());
                     newOrderDishes.setDishQuantity(quantity);
                     totalAmount += dish.getPrice() * quantity;

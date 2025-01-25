@@ -25,6 +25,10 @@ public class TableAndOrderForm {
     @JsonProperty
     private List<OrderDishes> allDishes;
 
+    public TableAndOrderForm() {
+
+    }
+
     // Getter and Setter for restaurantTable
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;

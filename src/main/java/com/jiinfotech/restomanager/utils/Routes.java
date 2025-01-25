@@ -22,7 +22,7 @@ public class Routes {
     public static final String tableUpdate = table + "/update/{id}";
     public static final String tableDelete = table + "/delete/{id}";
     public static final String getTableById = table + "/{id}";
-    public static final String getAllTable =  "/get-all-tables";
+    public static final String getAllTable = "/get-all-tables";
 
     public static final String order = "/orders";
     public static final String orderCreate = "/order-create";
@@ -34,6 +34,8 @@ public class Routes {
     public static final String clearOrdersByTableID = order + "/clear/table-id/{id}";
 
     public static final String getTempOrderTable = "/get-temp-order-table";
+    public static final String postPlaceOrder = "/post-place-order";
+    public static final String generateBill = "/generate-bill";
 
 
 }
