@@ -41,6 +41,8 @@ public class DashboardController extends BaseServices {
         model.addAttribute("allDishes", allDishes);
         model.addAttribute("allOrders", allOrders);
 
+
+
         return Templates.mainPage;
     }
 

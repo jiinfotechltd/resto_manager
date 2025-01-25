@@ -41,7 +41,7 @@ CREATE TABLE order_dishes (
     order_id BIGINT NOT NULL,
     dish_id BIGINT NOT NULL,
     dish_quant INT NOT NULL,
-    dish_name INT NOT NULL,
+    dish_name VARCHAR(255) NOT NULL,
     dish_price double NOT NULL,
     dish_total_amount double NOT NULL
 )

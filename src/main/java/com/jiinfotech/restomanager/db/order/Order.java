@@ -26,7 +26,6 @@ public class Order {
     @Column(name = "is_paid", nullable = false)
     private Boolean isPaid;
 
-
     public Long getId() {
         return id;
     }

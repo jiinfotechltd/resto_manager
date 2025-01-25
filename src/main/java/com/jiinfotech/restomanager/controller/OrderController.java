@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -33,16 +36,18 @@ public class OrderController extends BaseServices {
     private TableService tableService;
     @Autowired
     private DishService dishService;
+    @Autowired
+    private GoogleChatNotificationService googleChatNotificationService;
 
 
     @PostMapping(Routes.orderCreate)
     @ResponseBody
-    public String postOrderCreate(@RequestParam("tableId") Long tableId, @RequestParam("dishId") Long dishId, @RequestParam("quan") int quan ) throws Exception {
+    public String postOrderCreate(@RequestParam("tableId") Long tableId, @RequestParam("dishId") Long dishId, @RequestParam("quan") int quan) throws Exception {
 //        orderDishesServices.createNewOrder(tableId, dishId, quan);
         sessionStorage.setSessionStorage(tableId, dishId, quan);
         AjaxResponse ajaxResponse = new AjaxResponse();
         HashMap<String, Object> params = new HashMap<>();
-        params.put("tableId", tableId );
+        params.put("tableId", tableId);
         ajaxResponse.msg = "new dish creared";
         ajaxResponse.msgType = "success";
         ajaxResponse.parameters = toJson(params);
@@ -58,15 +63,47 @@ public class OrderController extends BaseServices {
         List<Order> allOrders = orderService.getAllOrderForTable();
         SessionStorage getSession = sessionStorage.getSession();
 
-         Optional<TableAndOrderForm> tableAndOrderForm =  allTables.stream()
-                 .filter(t -> t.getRestaurantTable().getId() == tableId)
-                 .findFirst();
+        Optional<TableAndOrderForm> tableAndOrderForm = allTables.stream()
+                .filter(t -> t.getRestaurantTable().getId() == tableId)
+                .findFirst();
 
         model.addAttribute("allTables", allTables);
         model.addAttribute("table", tableAndOrderForm.get());
         model.addAttribute("allDishes", allDishes);
         model.addAttribute("allOrders", allOrders);
-        return  "fragments/main-page-fragments ::" + Fragments.getTempOrderTable;
+        model.addAttribute("tableAndOrderForm", new TableAndOrderForm());
+        return "fragments/main-page-fragments ::" + Fragments.getTempOrderTable;
+    }
+
+    @PostMapping(Routes.generateBill)
+    public String generateBill(@RequestParam Long tableId, @RequestParam Long orderId) {
+
+        ByteArrayInputStream pdfStream = orderDishesServices.genrateBill(tableId, orderId);
+        try (FileOutputStream outputStream = new FileOutputStream(tableId+orderId.toString()+"bill.pdf")) {
+            byte[] buffer = pdfStream.readAllBytes();
+            outputStream.write(buffer);
+        } catch (IOException e) {
+            googleChatNotificationService.sendNotification("unable to generate pdf for bill");
+            e.printStackTrace();
+            return "error"; // Redirect to an error page if needed
+        }
+        return redirect(Routes.dashboard);
+    }
+
+    @PostMapping(Routes.postPlaceOrder)
+    public String postPlaceOrder(@RequestParam long tableId) {
+        List<TableAndOrderForm> allTables = tableService.getAllTables();
+        Optional<TableAndOrderForm> tableAndOrderForm = allTables.stream()
+                .filter(t -> t.getRestaurantTable().getId() == tableId)
+                .findFirst();
+
+
+        orderDishesServices.createNewOrder(tableAndOrderForm);
+
+        System.out.println(tableAndOrderForm);
+
+
+        return redirect(Routes.dashboard);
     }
 //    @PostMapping(Routes.orderCreate)
 //    protected ResponseEntity<Response<Order>> addOrder(@RequestBody Order order) {
