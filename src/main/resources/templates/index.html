@@ -1,68 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <div th:replace="dashboard/common-head :: common-head"></div>
+    <title>Index</title>
+    <div th:replace="dashboard/common-head :: common-head" ></div>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-    <div th:replace="dashboard/topbar :: topbar"></div>
-    <div th:replace="dashboard/sidebar :: sidebar"></div>
-    <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <h1 class="m-0 text-dark bg-blue">Dashboard</h1>
-            </div>
-        </div>
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-primary"><i class="fas fa-users"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Total Users</span>
-                                <span class="info-box-number">1,234</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-success"><i class="fas fa-dollar-sign"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Revenue</span>
-                                <span class="info-box-number">$12,345</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-warning"><i class="fas fa-file-alt"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Reports</span>
-                                <span class="info-box-number">23</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chart Example</h3>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chart-example" style="height: 200px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" data-kt-app-aside-enabled="true" data-kt-app-aside-fixed="true" data-kt-app-aside-push-toolbar="true" data-kt-app-aside-push-footer="true" class="app-default" data-kt-scrolltop="on">
+<ul class="pagination">
+    <li class="page-item previous disabled"><a href="#" class="page-link"><i class="previous"></i></a></li>
+    <li class="page-item "><a href="#" class="page-link">1</a></li>
+    <li class="page-item active"><a href="#" class="page-link">2</a></li>
+    <li class="page-item "><a href="#" class="page-link">3</a></li>
+    <li class="page-item "><a href="#" class="page-link">4</a></li>
+    <li class="page-item "><a href="#" class="page-link">5</a></li>
+    <li class="page-item "><a href="#" class="page-link">6</a></li>
+    <li class="page-item next"><a href="#"  class="page-link"><i class="next"></i></a></li>
+</ul>
+<ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1">Link 1</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2">Link 2</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3">Link 3</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
+        ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, animi aspernatur commodi consectetur culpa cum cumque deleniti, dignissimos earum illum magni odit officia omnis porro provident quia tempore? Deleniti dolor eius impedit laudantium. Amet aut illo laborum necessitatibus quae recusandae?
     </div>
-   <div th:replace="dashboard/footer :: footer"></div>
+    <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel">
+        ...
+    </div>
+    <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel">
+        ...
+    </div>
 </div>
 <div th:replace="dashboard/common-scripts :: common-scripts"></div>
 </body>

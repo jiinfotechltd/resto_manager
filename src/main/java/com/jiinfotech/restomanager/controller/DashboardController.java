@@ -40,7 +40,7 @@ public class DashboardController extends BaseServices {
         model.addAttribute("allOrders", allOrders);
         model.addAttribute("billing", new Billing());
 
-        return Templates.mainPage;
+        return Templates.index;
     }
 
     @GetMapping(Routes.login)
