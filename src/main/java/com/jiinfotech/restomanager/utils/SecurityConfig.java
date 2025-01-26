@@ -48,7 +48,6 @@ public class SecurityConfig {
                 .password("admin")
                 .roles("ADMIN")
                 .build();
-
         return new InMemoryUserDetailsManager(user, admin);
     }
 }
