@@ -29,7 +29,7 @@ public class TableController extends BaseServices {
 
     @GetMapping(Routes.table)
     public String showTables(Model model) {
-        List<RestaurantTable> tables = tableService.getAllTabesForDisplay();
+        List<RestaurantTable> tables = tableService.getAllTablesForDisplay();
         tables.sort(Comparator.comparingInt(RestaurantTable::getTableNumber));
         model.addAttribute("tables", tables);
         model.addAttribute("table", new RestaurantTable());
@@ -68,4 +68,3 @@ public class TableController extends BaseServices {
             return redirect(Routes.table);
     }
 }
-

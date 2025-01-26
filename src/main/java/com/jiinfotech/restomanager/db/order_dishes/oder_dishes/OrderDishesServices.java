@@ -62,41 +62,12 @@ public class OrderDishesServices extends BaseServices {
         } else {
             googleChatNotificationService.sendNotification("error when order placing in table please check");
         }
-
-
-//        orderDishes.setDishId(dishId);
-//        orderDishes.setDishQuantity(dishQun);
-//        Optional<RestaurantTable> restaurantTable = restaurantTableRepo.findById(tableId);
-//        if (restaurantTable.isPresent()) {
-//            restaurantTable.get().setIsVacant(false);
-//            restaurantTableRepo.save(restaurantTable.get());
-//        }
-//
-//        Order order = new Order();
-//        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-//        order.setCreatedAt(currentTime);
-//        order.setIsPaid(false);
-//        order.setTableId(tableId);
-//        Optional<Dish> mayBeDish = dishRepo.findById(dishId);
-//        double orderamount = 0.0;
-//        if (mayBeDish.isPresent()) {
-//            orderamount += mayBeDish.get().getPrice();
-//        }
-//        order.setTotalAmount(orderamount);
-//
-//        Order saved = orderRepo.save(order);
-//        orderDishes.setOrderId(saved.getId());
-//        orderDishesRepo.save(orderDishes);
     }
 
-
-    public void updateOrder(Long tableId, Long[] dishIds) {
-
-    }
+    public void updateOrder(Long tableId, Long[] dishIds) {    }
 
     public ByteArrayInputStream genrateBill(Long tableId, Long orderId) {
-        Optional<Order> mayBeOrder = orderRepo.findByIdAndIsPaid(orderId, false);
-
+        Optional<Order> mayBeOrder = orderRepo.findById(orderId);
         if (mayBeOrder.isPresent()) {
             List<OrderDishes> allDishes = orderDishesRepo.findAllByOrderId(orderId);
             String[] allDishesNames = allDishes.stream().map(OrderDishes::getDishName).toArray(String[]::new);
@@ -105,7 +76,7 @@ public class OrderDishesServices extends BaseServices {
             orderRepo.save(mayBeOrder.get());
             return billGenerateServices.generateAttractiveBill("Sharyat Hotel", "Kolhapur","9853212123", "www.jiinfoteh.com" , allDishesNames, allDishesTotalAmount, mayBeOrder.get().getTotalAmount());
         }
-        googleChatNotificationService.sendNotification("unable to generate Bill ");
+        googleChatNotificationService.sendNotification("With order ID: "+orderId +" Order not found");
         return null;
     }
 }

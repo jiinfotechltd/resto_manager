@@ -1741,7 +1741,7 @@
     <parameters xmi:id="_7bz7zs7BEe-BPMmXT759bQ" elementId="org.eclipse.ui.ide.showInSystemExplorer.path" name="Resource System Path Parameter"/>
   </commands>
   <commands xmi:id="_7bz7z87BEe-BPMmXT759bQ" elementId="org.eclipse.ui.edit.text.select.lineDown" commandName="Select Line Down" description="Extend the selection to the next line of text" category="_7bqKWc7BEe-BPMmXT759bQ"/>
-  <commands xmi:id="_7bz70M7BEe-BPMmXT759bQ" elementId="org.eclipse.jdt.ui.edit.text.java.sort.members" commandName="Sort Members" description="Sort all members using the member order preference" category="_7bqKcM7BEe-BPMmXT759bQ"/>
+  <commands xmi:id="_7bz70M7BEe-BPMmXT759bQ" elementId="org.eclipse.jdt.ui.edit.text.java.sort.members" commandName="Sort Members" description="Sort all members using the member orderId preference" category="_7bqKcM7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz70c7BEe-BPMmXT759bQ" elementId="org.eclipse.ui.edit.text.lowerCase" commandName="To Lower Case" description="Changes the selection to lower case" category="_7bqKWc7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz70s7BEe-BPMmXT759bQ" elementId="org.eclipse.egit.ui.team.CompareWithIndex" commandName="Compare with Index" category="_7bqKbc7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz7087BEe-BPMmXT759bQ" elementId="org.eclipse.m2e.discovery.ui" commandName="m2e Marketplace" category="_7bqKc87BEe-BPMmXT759bQ"/>
@@ -2107,7 +2107,7 @@
   <commands xmi:id="_7bz9K87BEe-BPMmXT759bQ" elementId="org.eclipse.ui.navigate.up" commandName="Up" description="Navigate up one level" category="_7bqKWs7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz9LM7BEe-BPMmXT759bQ" elementId="org.eclipse.ui.window.activateEditor" commandName="Activate Editor" description="Activate the editor" category="_7bqKYs7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz9Lc7BEe-BPMmXT759bQ" elementId="org.eclipse.m2e.core.ui.command.addPlugin" commandName="Add Maven Plugin" description="Add Maven plugin" category="_7bqKVM7BEe-BPMmXT759bQ"/>
-  <commands xmi:id="_7bz9Ls7BEe-BPMmXT759bQ" elementId="org.eclipse.jdt.ui.edit.text.java.modify.method.parameters" commandName="Change Method Signature" description="Change method signature includes parameter names and parameter order" category="_7bqKY87BEe-BPMmXT759bQ"/>
+  <commands xmi:id="_7bz9Ls7BEe-BPMmXT759bQ" elementId="org.eclipse.jdt.ui.edit.text.java.modify.method.parameters" commandName="Change Method Signature" description="Change method signature includes parameter names and parameter orderId" category="_7bqKY87BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz9L87BEe-BPMmXT759bQ" elementId="org.eclipse.ui.edit.text.delete.line.to.end" commandName="Delete to End of Line" description="Delete to the end of a line of text" category="_7bqKWc7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz9MM7BEe-BPMmXT759bQ" elementId="org.eclipse.jdt.ui.correction.extractLocal.assist" commandName="Quick Assist - Extract local variable (replace all occurrences)" description="Invokes quick assist and selects 'Extract local variable (replace all occurrences)'" category="_7bqKcM7BEe-BPMmXT759bQ"/>
   <commands xmi:id="_7bz9Mc7BEe-BPMmXT759bQ" elementId="org.springsource.ide.eclipse.commons.ui.relaunch" commandName="Relaunch Application" description="Relaunch last launched application" category="_7bqKZ87BEe-BPMmXT759bQ"/>

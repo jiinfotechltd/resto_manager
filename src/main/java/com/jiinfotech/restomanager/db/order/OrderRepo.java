@@ -11,6 +11,6 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
 
     List<Order> findByTableId(long tableId);
 
-    Optional<Order> findByIdAndIsPaid(Long orderId, boolean b);
+    Optional<Order> findById(Long orderId);
 }
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Routes {
 
-    public static final String dashboard = "/";
+    public static final String dashboard = "/dashboard";
     public static final String login = "/login";
     public static final String signup = "/signup";
     public static final String error = "/error";
@@ -37,5 +37,9 @@ public class Routes {
     public static final String postPlaceOrder = "/post-place-order";
     public static final String generateBill = "/generate-bill";
 
-
+    public static final String bills = "/bills";
+    public static final String createBill = "/create-bill";
+    public static final String getBillById = bills + "/bill/{id}";
+    public static final String billUpdate = bills + "/bill-update/{id}";
+    public static final String billDelete = bills + "/bill-delete/{id}";
 }
