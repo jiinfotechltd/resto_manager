@@ -29,7 +29,7 @@
                     </button>
                     <button class="btn btn-sm small-box-footer" th:if="${table.restaurantTable.isVacant}"
                             data-toggle="modal" th:data-target="'#modal-xl' + ${table.restaurantTable.tableNumber}">
-                        Take order <i class="fas fa-arrow-circle-right"></i>
+                        Take orderId <i class="fas fa-arrow-circle-right"></i>
                     </button>
                     <div class="modal fade" th:id="'modal-xl' + ${table.restaurantTable.tableNumber}"
                          aria-hidden="true">
@@ -77,7 +77,7 @@
                                         <div class="card-header">Order for table <span
                                                 th:text="${table.restaurantTable.tableNumber}"></span></div>
                                         <div class="card-body">
-                                            <div th:replace="fragments/main-page-fragments :: get-temp-order-table"></div>
+                                            <div th:replace="fragments/main-page-fragments :: get-temp-orderId-table"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -90,18 +90,18 @@
                     </div>
                 </div>
             </div>
-            <div class="card" th:each=" order : ${allOrders}">
-                <form th:action="@{${@routes.generateBill}}" method="post">
+            <div class="card" th:each=" orderId : ${allOrders}">
+                <form th:action="@{${@routes.createBill}}" th:object="${billing}" method="post">
                     <div class="card-header">
-                        <span th:text="${order.id}"></span>
+                        <span th:text="${orderId.id}"></span>
                     </div>
                     <div class="card-body d-flex flex-column gap-2">
-                        <span>totalAmount : <span th:text="${order.totalAmount}"></span></span>
-                        <span> table   : <span th:text="${order.tableId}"></span> </span>
+                        <span>totalAmount : <span th:text="${orderId.totalAmount}"></span></span>
+                        <span> table   : <span th:text="${orderId.tableId}"></span> </span>
                     </div>
                     <div class="card-footer">
-                        <input type="hidden" name="tableId" th:value="${order.tableId}"/>
-                        <input type="hidden" name="orderId" th:value="${order.id}"/>
+                        <input type="hidden" name="tableId" th:value="${orderId.tableId}"/>
+                        <input type="hidden" name="orderId" th:value="${orderId.id}"/>
                         <button class="btn btn-success" type="submit">Generate Bill</button>
                     </div>
                 </form>

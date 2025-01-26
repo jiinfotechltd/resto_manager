@@ -1,12 +1,8 @@
 package com.jiinfotech.restomanager.db.order;
 
-
-import com.jiinfotech.restomanager.db.dish.Dish;
-import com.jiinfotech.restomanager.db.table.RestaurantTable;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -65,7 +61,6 @@ public class Order {
     public void setIsPaid(Boolean isPaid) {
         this.isPaid = isPaid;
     }
-
 
     public Order() {
     }

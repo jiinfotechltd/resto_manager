@@ -83,7 +83,7 @@ public class TableService {
         }
     }
 
-    public List<RestaurantTable> getAllTabesForDisplay() {
+    public List<RestaurantTable> getAllTablesForDisplay() {
         return tableRepo.findAll();
     }
 }

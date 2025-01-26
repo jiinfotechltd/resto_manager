@@ -28,7 +28,6 @@ public class OrderDishes {
     @Column(name = "dish_total_amount", nullable = false)
     private double dishTotalAmount ;
 
-    // Getter and Setter for dishName
     public String getDishName() {
         return dishName;
     }
@@ -37,7 +36,6 @@ public class OrderDishes {
         this.dishName = dishName;
     }
 
-    // Getter and Setter for dishPrice
     public double getDishPrice() {
         return dishPrice;
     }
@@ -46,7 +44,6 @@ public class OrderDishes {
         this.dishPrice = dishPrice;
     }
 
-    // Getter and Setter for dishTotalAmount
     public double getDishTotalAmount() {
         return dishTotalAmount;
     }
@@ -87,8 +84,6 @@ public class OrderDishes {
         this.dishQuantity = dishQuantity;
     }
 
-
-    // Constructors
     public OrderDishes() {
     }
 
@@ -97,5 +92,4 @@ public class OrderDishes {
         this.dishId = dishId;
         this.dishQuantity = dishQuantity;
     }
-
 }

@@ -1,10 +1,7 @@
 package com.jiinfotech.restomanager.db.table;
 
-import com.jiinfotech.restomanager.db.order.Order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "restaurant_table")
@@ -22,10 +19,6 @@ public class RestaurantTable {
 
     @Column(name = "capacity", nullable = false)
     private int capacity;
-
-//    // Optional: Bidirectional relationship with Order entity if needed
-//    @OneToMany(mappedBy = "table")
-//    private List<Order> orders;
 
     public RestaurantTable() {
 
@@ -79,11 +72,11 @@ public class RestaurantTable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RestaurantTable that = (RestaurantTable) o;
-        return id == that.id; // You can also use tableNumber if it's unique.
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Long.hashCode(id); // Or use Integer.hashCode(tableNumber) if using tableNumber.
+        return Long.hashCode(id);
     }
 }

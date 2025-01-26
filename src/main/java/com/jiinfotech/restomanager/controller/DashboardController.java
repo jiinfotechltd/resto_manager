@@ -1,10 +1,10 @@
 package com.jiinfotech.restomanager.controller;
 
+import com.jiinfotech.restomanager.db.billing.Billing;
 import com.jiinfotech.restomanager.db.dish.Dish;
 import com.jiinfotech.restomanager.db.dish.DishService;
 import com.jiinfotech.restomanager.db.order.Order;
 import com.jiinfotech.restomanager.db.order.OrderService;
-import com.jiinfotech.restomanager.db.table.RestaurantTable;
 import com.jiinfotech.restomanager.db.table.TableService;
 import com.jiinfotech.restomanager.forms.TableAndOrderForm;
 import com.jiinfotech.restomanager.utils.*;
@@ -32,23 +32,19 @@ public class DashboardController extends BaseServices {
     public String showDashboard(Model model) {
         List<TableAndOrderForm> allTables = tableService.getAllTables();
         List<Dish> allDishes = dishService.getAllDishes();
-
         List<Order> allOrders = orderService.getAllOrderForTable();
         SessionStorage getSession = sessionStorage.getSession();
-
 
         model.addAttribute("allTables", allTables);
         model.addAttribute("allDishes", allDishes);
         model.addAttribute("allOrders", allOrders);
-
-
+        model.addAttribute("billing", new Billing());
 
         return Templates.mainPage;
     }
 
     @GetMapping(Routes.login)
     public String getLogin(Model model) {
-
         return Templates.login;
     }
 
@@ -56,5 +52,4 @@ public class DashboardController extends BaseServices {
     public String postLogin(Model model) {
         return redirect(Routes.dish);
     }
-
 }
