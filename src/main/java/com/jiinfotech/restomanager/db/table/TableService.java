@@ -1,6 +1,7 @@
 package com.jiinfotech.restomanager.db.table;
 
 import com.jiinfotech.restomanager.db.order.Order;
+import com.jiinfotech.restomanager.db.order.OrderRepo;
 import com.jiinfotech.restomanager.forms.TableAndOrderForm;
 import com.jiinfotech.restomanager.utils.GoogleChatNotificationService;
 import com.jiinfotech.restomanager.utils.SessionStorage;
@@ -21,6 +22,8 @@ public class TableService {
     private GoogleChatNotificationService googleChatNotificationService;
     @Autowired
     private SessionStorage sessionStorage;
+    @Autowired
+    private OrderRepo orderRepo;
 
     public void addTable(RestaurantTable restaurantTable) {
         Optional<RestaurantTable> mayBeTable = tableRepo.findByTableNumber(restaurantTable.getTableNumber());
@@ -36,8 +39,9 @@ public class TableService {
         if (sessionStorage.getTableAndThereOrder() != null && !sessionStorage.getTableAndThereOrder().isEmpty()) {
             List<TableAndOrderForm> tableAndOrderForms = tableRepo.findAll().stream().map(table -> {
                 TableAndOrderForm tableAndOrdersDetails = new TableAndOrderForm();
-                tableAndOrdersDetails.setRestaurantTable(table); // Set the restaurant table
+                tableAndOrdersDetails.setRestaurantTable(table);
                 double totalAmount = 0.0;
+                tableAndOrdersDetails.setOrdersList(orderRepo.findBAllByTableIdAndIsPaid(table.getId(), false));
                 if (getSessionStorage.getTableAndThereOrder().containsKey(table)) {
                     totalAmount = getSessionStorage.getTableAndThereOrder().get(table).keySet().iterator().next().getTotalAmount();
                     Order order = getSessionStorage.getTableAndThereOrder().get(table).keySet().iterator().next();
@@ -46,6 +50,7 @@ public class TableService {
                 }
                 return tableAndOrdersDetails;
             }).toList();
+
             return tableAndOrderForms;
         } else {
             List<TableAndOrderForm> tableAndOrderForms = tableRepo.findAll().stream().map(table -> {

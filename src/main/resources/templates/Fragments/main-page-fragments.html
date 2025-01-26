@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="get-temp-orderId-table" th:td-component="${@fragments.getTempOrderTable}+${table.restaurantTable.id}" th:td-component-url="${@routes.getTempOrderTable}">
+<div th:fragment="get-temp-order-table" th:td-component="${@fragments.getTempOrderTable}+${table.restaurantTable.id}" th:td-component-url="${@routes.getTempOrderTable}">
+    <div class="card" th:each=" order : ${table.ordersList}">
+        <span th:text="${order.id}" ></span>
+    </div>
     <form th:action="@{${@routes.postPlaceOrder}}" method="post" th:object="${tableAndOrderForm}">
         <input type="hidden" name="tableId" th:value="${table.restaurantTable.id}"/>
         <table class="table">

@@ -20,6 +20,9 @@ public class TableAndOrderForm {
     private Order order;
 
     @JsonProperty
+    private List<Order> ordersList;
+
+    @JsonProperty
     private double totalAmount;
 
     @JsonProperty
@@ -29,7 +32,14 @@ public class TableAndOrderForm {
 
     }
 
-    // Getter and Setter for restaurantTable
+    public List<Order> getOrdersList(){
+        return this.ordersList;
+    }
+
+    public void setOrdersList( List<Order> ordersList){
+        this.ordersList = ordersList;
+    }
+
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
     }
@@ -38,7 +48,6 @@ public class TableAndOrderForm {
         this.restaurantTable = restaurantTable;
     }
 
-    // Getter and Setter for order
     public Order getOrder() {
         return order;
     }
@@ -47,7 +56,6 @@ public class TableAndOrderForm {
         this.order = order;
     }
 
-    // Getter and Setter for totalAmount
     public double getTotalAmount() {
         return totalAmount;
     }
@@ -56,7 +64,6 @@ public class TableAndOrderForm {
         this.totalAmount = totalAmount;
     }
 
-    // Getter and Setter for allDishes
     public List<OrderDishes> getAllDishes() {
         return allDishes;
     }
