@@ -7,5 +7,32 @@
     <link href="/static/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script>
+        var defaultThemeMode = "light";
+        var themeMode;
+
+        if ( document.documentElement ) {
+            if ( document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+            } else {
+                if ( localStorage.getItem("data-bs-theme") !== null ) {
+                    themeMode = localStorage.getItem("data-bs-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
+            }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
+        }
+    </script>
+    <script src="/static/plugins/global/plugins.bundle.js"></script>
+    <script src="/static/js/scripts.bundle.js"></script>
+    <style>
+        body{
+          font-family: "poppins";
+          }
+    </style>
 </div>
 </html>

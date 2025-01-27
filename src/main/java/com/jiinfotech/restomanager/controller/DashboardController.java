@@ -52,4 +52,9 @@ public class DashboardController extends BaseServices {
     public String postLogin(Model model) {
         return redirect(Routes.dish);
     }
+
+    @GetMapping(Routes.signup)
+    public String getSignup(Model model) {
+        return Templates.signup;
+    }
 }
