@@ -16,5 +16,6 @@ public class StaticResourceConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/js/**").addResourceLocations("classpath:/static/js/");
         registry.addResourceHandler("/static/media/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/static/plugins/**").addResourceLocations("classpath:/static/plugins/");
+        registry.addResourceHandler("/static/media/svg/**").addResourceLocations("classpath:/static/media/svg/");
     }
 }
