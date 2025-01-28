@@ -61,3 +61,27 @@ CREATE TABLE billing (
 ENGINE = InnoDB
 DEFAULT CHARSET = utf8mb4
 COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE users (
+    uid                 INT          AUTO_INCREMENT,
+    email               VARCHAR(255) NOT NULL,
+    password            VARCHAR(255) NOT NULL,
+    is_email_verified   BOOLEAN      DEFAULT FALSE,
+    profile_pic         VARCHAR(255),
+    profile_bg          VARCHAR(255),
+    created_at          TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    first_name          VARCHAR(100) NOT NULL,
+    last_name           VARCHAR(100) NOT NULL,
+    is_deleted BOOLEAN  DEFAULT      FALSE,
+    deleted_At          TIMESTAMP,
+    is_trail_user       BOOLEAN      DEFAULT TRUE,
+    contact             VARCHAR(15),
+    contact1            VARCHAR(15),
+    is_contact_verified BOOLEAN      DEFAULT FALSE,
+    is_enable BOOLEAN   DEFAULT      TRUE,
+
+    PRIMARY KEY (uid),
+    UNIQUE (email)
+) ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4
+COLLATE utf8mb4_unicode_ci;

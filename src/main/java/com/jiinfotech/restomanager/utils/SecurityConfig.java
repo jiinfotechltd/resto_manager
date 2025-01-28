@@ -17,37 +17,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
+                .csrf()
+                .ignoringRequestMatchers(Routes.)
                 .requestMatchers(Routes.login, Routes.signup, Routes.error).permitAll()
                 .requestMatchers("/resources/**" ,"/static/**").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/resources/**").permitAll()
-//                .anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
                 .loginPage(Routes.login)
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
-
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user")
-                .roles("USER")
-                .build();
 
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
 }
