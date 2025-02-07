@@ -9,11 +9,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <div th:replace="dashboard/topbar :: topbar"></div>
-    <div th:replace="dashboard/sidebar :: sidebar"></div>
-    <div class="content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="content-wrapper bg-light">
+        <hr class="m-0 mb-5 text-gray-400">
+        <nav class=" bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Filters</a>
+                <a class="" href="#">Filters</a>
                 <form class="d-flex align-items-center w-75">
                     <input class="form-control me-2" type="search" placeholder="Search for dishes" aria-label="Search" id="searchInput">
                     <select class="form-select ms-2" id="filterSelect">
@@ -144,7 +144,6 @@
         </div>
     </div>
     <div th:replace="dashboard/components :: delete-modal"></div>
-    <div th:replace="dashboard/footer :: footer"></div>
 </div>
 <div th:replace="dashboard/common-scripts :: common-scripts"></div>
 </body>
